@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>项目投标分析与建议书 — 巴西塞阿拉州农村供水工程</title>
+<style>
+  :root {
+    --primary: #1a5276;
+    --primary-light: #2980b9;
+    --accent: #e67e22;
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --text: #2c3e50;
+    --text-light: #7f8c8d;
+    --warn: #e74c3c;
+    --ok: #27ae60;
+    --border: #e0e0e0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,'Noto Sans SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  
+  .cover{background:linear-gradient(135deg,#1a5276 0,#2980b9 50%,#1abc9c 100%);color:#fff;padding:80px 40px;text-align:center;position:relative;overflow:hidden}
+  .cover::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.05) 1px,transparent 1px);background-size:40px 40px;animation:drif 60s linear infinite}
+  @keyframes drif{0%{transform:translate(0,0)}100%{transform:translate(40px,40px)}}
+  .cover h1{font-size:2.4em;font-weight:800;margin-bottom:12px;position:relative}
+  .cover .sub{font-size:1.1em;opacity:.85;margin-bottom:6px;position:relative}
+  .cover .meta{font-size:.9em;opacity:.7;position:relative}
+  .cover .badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:4px 16px;font-size:.8em;margin-top:16px}
+
+  .container{max-width:1000px;margin:0 auto;padding:20px}
+
+  section{background:var(--card);border-radius:12px;padding:32px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+  section h2{font-size:1.4em;color:var(--primary);border-left:4px solid var(--primary-light);padding-left:14px;margin-bottom:20px}
+  section h3{font-size:1.1em;color:var(--text);margin:16px 0 10px}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+
+  .info-item{display:flex;padding:8px 0;border-bottom:1px solid var(--border)}
+  .info-item:last-child{border:0}
+  .info-item .label{color:var(--text-light);min-width:120px;font-size:.9em}
+  .info-item .value{flex:1;font-weight:500}
+
+  table{width:100%;border-collapse:collapse;margin:12px 0}
+  th{background:var(--primary);color:#fff;padding:10px 14px;text-align:left;font-weight:600;font-size:.9em}
+  td{padding:10px 14px;border-bottom:1px solid var(--border);font-size:.9em}
+  tr:hover td{background:#f0f7ff}
+
+  .risk-list{display:grid;gap:16px}
+  .risk-card{border-radius:10px;padding:16px 20px;border-left:5px solid}
+  .risk-card.high{border-color:#e74c3c;background:#fdf2f2}
+  .risk-card.medium{border-color:#f39c12;background:#fef9e7}
+  .risk-card.low{border-color:#3498db;background:#ebf5fb}
+  .risk-card .title{font-weight:700;font-size:1em;margin-bottom:6px}
+  .risk-card .desc{font-size:.88em;color:#555;line-height:1.6}
+
+  .flow-section{margin:20px 0}
+  .flow-row{display:flex;align-items:stretch;gap:0;margin-bottom:0}
+  .flow-step{flex:1;padding:14px 10px;text-align:center;position:relative}
+  .flow-step .phase{font-weight:700;font-size:.82em;margin-bottom:4px}
+  .flow-step .period{font-size:.75em;color:#666;margin-bottom:6px}
+  .flow-step .tasks{font-size:.78em;color:#444;line-height:1.5}
+  .flow-step::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:1.4em;color:var(--primary-light)}
+  .flow-step:last-child::after{display:none}
+  .flow-step:nth-child(1){background:#e8f4fd;border-radius:8px 0 0 8px}
+  .flow-step:nth-child(2){background:#e0f2f1}
+  .flow-step:nth-child(3){background:#fff8e1}
+  .flow-step:nth-child(4){background:#f3e5f5;border-radius:0 8px 8px 0}
+
+  .action-table td:first-child{text-align:center;font-size:1.2em}
+  .tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:.78em;font-weight:600}
+  .tag-red{background:#fde8e8;color:#c0392b}
+  .tag-yellow{background:#fef3cd;color:#856404}
+  .tag-green{background:#d4edda;color:#155724}
+
+  .chart-wrap{display:flex;justify-content:center;margin:16px 0}
+
+  .badge-row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+  .badge-item{background:var(--bg);border-radius:8px;padding:16px;flex:1;min-width:140px;text-align:center}
+  .badge-item .num{font-size:1.6em;font-weight:800;color:var(--primary)}
+  .badge-item .lbl{font-size:.78em;color:#666;margin-top:2px}
+
+  footer{text-align:center;padding:30px;color:var(--text-light);font-size:.82em}
+
+  @media(max-width:700px){
+    .grid2,.grid3{grid-template-columns:1fr}
+    .flow-row{flex-direction:column}
+    .flow-step::after{display:none}
+    .cover h1{font-size:1.6em}
+    .cover{padding:50px 20px}
+  }
+
+  .gantt-bar{display:flex;height:36px;margin:6px 0;border-radius:6px;overflow:hidden;font-size:.78em;font-weight:600}
+  .gantt-bar .seg{display:flex;align-items:center;justify-content:center;color:#fff;padding:0 4px}
+  .gantt-bar .seg.s1{background:#3498db;flex:2}
+  .gantt-bar .seg.s2{background:#2ecc71;flex:8}
+  .gantt-bar .seg.s3{background:#f39c12;flex:3}
+  .gantt-bar .seg.s4{background:#9b59b6;flex:1}
+  .gantt-labels{display:flex;font-size:.75em;color:#666;margin-bottom:2px}
+  .gantt-labels span{text-align:center}
+  .gantt-labels span:nth-child(1){flex:2}
+  .gantt-labels span:nth-child(2){flex:8}
+  .gantt-labels span:nth-child(3){flex:3}
+  .gantt-labels span:nth-child(4){flex:1}
+</style>
+</head>
+<body>
+
+<!-- 封面 -->
+<div class="cover">
+  <div class="badge">世行项目 · Invitation for Bids</div>
+  <h1>项目投标分析与建议书</h1>
+  <div class="sub">Ceara Rural Sustainable Development and Competitiveness Phase II</div>
+  <div class="meta">巴西 · 塞阿拉州 · 农村供水系统建设工程 · 2026年5月</div>
+</div>
+
+<div class="container">
+
+<!-- 项目信息 -->
+<section>
+  <h2>📋 项目基本信息</h2>
+  <div class="badge-row">
+    <div class="badge-item"><div class="num">US$1.5亿</div><div class="lbl">项目总预算</div></div>
+    <div class="badge-item"><div class="num">16个月</div><div class="lbl">剩余时间</div></div>
+    <div class="badge-item"><div class="num">2027.9.30</div><div class="lbl">项目关闭</div></div>
+    <div class="badge-item"><div class="num">May 8</div><div class="lbl">招标发布</div></div>
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="info-item"><span class="label">项目ID</span><span class="value">P167455</span></div>
+      <div class="info-item"><span class="label">资金来源</span><span class="value">世界银行 IBRD</span></div>
+      <div class="info-item"><span class="label">世行贷款</span><span class="value">US$ 100,000,000</span></div>
+      <div class="info-item"><span class="label">政府配套</span><span class="value">US$ 53,530,000</span></div>
+      <div class="info-item"><span class="label">实施机构</span><span class="value">塞阿拉州农业发展厅</span></div>
+    </div>
+    <div>
+      <div class="info-item"><span class="label">国家</span><span class="value">巴西 · 塞阿拉州</span></div>
+      <div class="info-item"><span class="label">项目周期</span><span class="value">2020.4 — 2027.9</span></div>
+      <div class="info-item"><span class="label">环境类别</span><span class="value">B 类</span></div>
+      <div class="info-item"><span class="label">项目经理</span><span class="value">Marie Paviot</span></div>
+      <div class="info-item"><span class="label">投标语言</span><span class="value">🇧🇷 葡萄牙语</span></div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <svg width="600" height="200" viewBox="0 0 600 200">
+      <rect x="50" y="20" width="500" height="40" rx="8" fill="#ecf0f1"/>
+      <rect x="50" y="20" width="400" height="40" rx="8" fill="#3498db" opacity="0.85"/>
+      <text x="250" y="46" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">资金使用进度：已拨付 US$7,000万 / 共 US$15,353万</text>
+      <text x="460" y="46" text-anchor="middle" fill="#7f8c8d" font-size="11">剩余 54%</text>
+      
+      <text x="50" y="110" fill="#2c3e50" font-size="13" font-weight="600">时间线</text>
+      <rect x="50" y="120" width="500" height="6" rx="3" fill="#ecf0f1"/>
+      <rect x="50" y="120" width="390" height="6" rx="3" fill="#e74c3c"/>
+      <text x="50" y="150" fill="#7f8c8d" font-size="11">2019/7 批准</text>
+      <text x="235" y="150" fill="#e74c3c" font-size="11" font-weight="600">← 现在</text>
+      <text x="440" y="150" fill="#7f8c8d" font-size="11">2027/9 关闭</text>
+      <circle cx="440" cy="123" r="8" fill="#e74c3c" stroke="#fff" stroke-width="2"/>
+      
+      <text x="460" y="180" fill="#7f8c8d" font-size="10">剩余 ~16 个月</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 招标详情 -->
+<section>
+  <h2>📄 本次招标标的详情</h2>
+  <table>
+    <tr><th style="width:140px">项目</th><th>信息</th></tr>
+    <tr><td>招标类型</td><td><span class="tag tag-red">Invitation for Bids</span>（投标邀请）</td></tr>
+    <tr><td>发布日期</td><td><strong>2026年5月8日</strong></td></tr>
+    <tr><td>标的名称</td><td>农村供水系统建设工程（Civil Works）— 含材料供应与安装</td></tr>
+    <tr><td>工作范围</td><td>① 农村供水系统建设（管网铺设、储水设施）② 卫生模块（卫生厕所）建设 ③ 配套材料采购与安装</td></tr>
+    <tr><td>投标语言</td><td>🇧🇷 葡萄牙语</td></tr>
+    <tr><td>状态</td><td><span class="tag tag-green">已发布 · 招标中</span></td></tr>
+  </table>
+</section>
+
+<!-- 项目背景 -->
+<section>
+  <h2>🌍 项目背景与评估</h2>
+  <p style="margin-bottom:16px">塞阿拉州位于巴西东北部，属于<span style="color:#e74c3c;font-weight:600">半干旱气候区</span>，水资源匮乏。本项目是世行资助的 São José III 项目第二阶段，核心目标是通过气候适应性方案提升农村居民市场接入能力及供水和卫生设施覆盖。</p>
+  
+  <div class="chart-wrap">
+    <svg width="580" height="240" viewBox="0 0 580 240">
+      <rect x="130" y="10" width="60" height="30" rx="6" fill="#2ecc71"/>
+      <text x="160" y="30" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">满意</text>
+      <rect x="260" y="10" width="60" height="30" rx="6" fill="#f39c12"/>
+      <text x="290" y="30" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">中等满意</text>
+      <rect x="390" y="10" width="60" height="30" rx="6" fill="#e74c3c"/>
+      <text x="420" y="30" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">不满意</text>
+
+      <text x="20" y="75" font-size="12" fill="#555">整体实施进度</text>
+      <rect x="160" y="63" width="200" height="20" rx="4" fill="#e8f8f5"/>
+      <rect x="160" y="63" width="185" height="20" rx="4" fill="#2ecc71"/>
+      <text x="375" y="79" font-size="11" fill="#27ae60">92%</text>
+
+      <text x="20" y="105" font-size="12" fill="#555">PDO 实现进度</text>
+      <rect x="160" y="93" width="200" height="20" rx="4" fill="#fef9e7"/>
+      <rect x="160" y="93" width="140" height="20" rx="4" fill="#f39c12"/>
+      <text x="375" y="109" font-size="11" fill="#e67e22">70%</text>
+
+      <text x="20" y="135" font-size="12" fill="#555">财务管理</text>
+      <rect x="160" y="123" width="200" height="20" rx="4" fill="#fef9e7"/>
+      <rect x="160" y="123" width="150" height="20" rx="4" fill="#f39c12"/>
+      <text x="375" y="139" font-size="11" fill="#e67e22">75%</text>
+
+      <text x="20" y="165" font-size="12" fill="#555">采购管理</text>
+      <rect x="160" y="153" width="200" height="20" rx="4" fill="#fef9e7"/>
+      <rect x="160" y="153" width="148" height="20" rx="4" fill="#f39c12"/>
+      <text x="375" y="169" font-size="11" fill="#e67e22">74%</text>
+
+      <text x="20" y="195" font-size="12" fill="#555">对口资金</text>
+      <rect x="160" y="183" width="200" height="20" rx="4" fill="#fdedec"/>
+      <rect x="160" y="183" width="90" height="20" rx="4" fill="#e74c3c"/>
+      <text x="375" y="199" font-size="11" fill="#e74c3c" font-weight="600">45% ⚠️</text>
+
+      <text x="20" y="225" font-size="12" fill="#555">项目监测与评估</text>
+      <rect x="160" y="213" width="200" height="20" rx="4" fill="#e8f8f5"/>
+      <rect x="160" y="213" width="180" height="20" rx="4" fill="#2ecc71"/>
+      <text x="375" y="229" font-size="11" fill="#27ae60">90%</text>
+    </svg>
+  </div>
+  
+  <p style="background:#fdf2f2;padding:12px 16px;border-radius:8px;font-size:.9em;margin-top:12px">
+    ⚠️ <strong>风险警示：</strong>对口资金（Counterpart Funding）评级仅45%，巴西地方政府配套资金可能存在延迟风险，建议投标报价中考虑汇率波动和付款延迟的缓冲。
+  </p>
+</section>
+
+<!-- 风险分析 -->
+<section>
+  <h2>⚠️ 风险分析</h2>
+  <div class="risk-list">
+    <div class="risk-card high">
+      <div class="title">🔴 时间风险 · 紧迫度最高</div>
+      <div class="desc">项目关闭日期2027年9月30日，剩余US$8,300万需16个月内执行完毕。世行项目通常允许6个月展期，但仍需快速推进。半干旱气候限制施工窗口期，需精准排期。</div>
+    </div>
+    <div class="risk-card high">
+      <div class="title">🔴 财务风险 · 资金压力</div>
+      <div class="desc">已拨付约US$7,000万，剩余54%资金需16个月内消化。巴西政府配套资金持续面临压力（评级中等不满意），美元/雷亚尔汇率波动增加成本不确定性。</div>
+    </div>
+    <div class="risk-card medium">
+      <div class="title">🟡 执行风险 · 现场挑战</div>
+      <div class="desc">塞阿拉州农村基础设施薄弱，物流成本高。需与地方政府协调土地征用和社区参与。本地化用工要求（≥30%本地员工）增加管理复杂度。</div>
+    </div>
+    <div class="risk-card medium">
+      <div class="title">🟡 竞争风险 · 进入门槛</div>
+      <div class="desc">项目吸引巴西本土建筑企业，国际企业需葡萄牙语文档能力、巴西本地注册或合作伙伴、了解巴西税收/劳动法体系。推荐与当地企业组成联合体。</div>
+    </div>
+    <div class="risk-card low">
+      <div class="title">🟢 政治风险 · 可控</div>
+      <div class="desc">巴西2026年为大选年，政府部门可能存在人事变动。但项目已运行6年+，制度惯性强，影响有限。世界银行监管确保项目延续性。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 投标策略 -->
+<section>
+  <h2>🎯 投标策略</h2>
+  <div class="grid2" style="margin-bottom:16px">
+    <div style="background:#e8f4fd;border-radius:8px;padding:16px">
+      <h3 style="margin:0 0 8px;color:var(--primary);border:0;padding:0">📌 合作模式</h3>
+      <p style="font-size:.9em">推荐与巴西本地建筑公司组成<strong>联合体（JV）</strong>，互补资质和经验。本地合作伙伴负责巴西CREA注册、劳工合规、税务筹划，国际方提供技术方案和项目管理。</p>
+    </div>
+    <div style="background:#e0f2f1;border-radius:8px;padding:16px">
+      <h3 style="margin:0 0 8px;color:#1abc9c;border:0;padding:0">💡 技术差异化</h3>
+      <p style="font-size:.9em">强调<strong>气候适应性供水方案</strong>和<strong>节水技术</strong>，包括干旱期保障方案、节水型卫生模块、社区水管理委员会建立，契合世行气候适应性核心目标。</p>
+    </div>
+    <div style="background:#fff8e1;border-radius:8px;padding:16px">
+      <h3 style="margin:0 0 8px;color:#f39c12;border:0;padding:0">💰 价格策略</h3>
+      <p style="font-size:.9em">中低价位+<strong>全生命周期成本</strong>优势。世行评标不仅看投标价，还考虑运营维护成本。建议提供5年运维方案作为加分项。</p>
+    </div>
+    <div style="background:#f3e5f5;border-radius:8px;padding:16px">
+      <h3 style="margin:0 0 8px;color:#9b59b6;border:0;padding:0">🤝 社会价值</h3>
+      <p style="font-size:.9em">突出<strong>社区参与和培训方案</strong>：受益社区培训、水管理委员会建立、女性参与计划。世行高度重视项目的社会可持续性。</p>
+    </div>
+  </div>
+
+  <h3>关键技术方案</h3>
+  <table>
+    <tr><th>模块</th><th>方案</th></tr>
+    <tr><td>💧 供水系统</td><td>深井取水 + 小型水处理 + 管网入户</td></tr>
+    <tr><td>🚽 卫生模块</td><td>化粪池 + 渗滤系统（节水型方案）</td></tr>
+    <tr><td>🌡️ 气候适应性</td><td>干旱期供水保障方案 + 雨水收集</td></tr>
+    <tr><td>👥 社区参与</td><td>受益社区培训 + 水管理委员会建立</td></tr>
+  </table>
+</section>
+
+<!-- 执行计划 - 甘特图 -->
+<section>
+  <h2>📅 项目执行计划</h2>
+  
+  <div class="gantt-labels">
+    <span>启动期 2个月</span>
+    <span>施工期 8个月</span>
+    <span>收尾 3个月</span>
+    <span>质保 12个月</span>
+  </div>
+  <div class="gantt-bar">
+    <div class="seg s1">签约·动员</div>
+    <div class="seg s2">水井·管网·设施·平行施工</div>
+    <div class="seg s3">调试·培训·移交</div>
+    <div class="seg s4">维保</div>
+  </div>
+  
+  <div class="flow-row" style="margin-top:20px">
+    <div class="flow-step" style="flex:2">
+      <div class="phase" style="color:#3498db">第一阶段</div>
+      <div class="period">启动期 · 2个月</div>
+      <div class="tasks">签订合同 · 团队组建<br>施工图设计 · 社区启动</div>
+    </div>
+    <div class="flow-step" style="flex:8">
+      <div class="phase" style="color:#2ecc71">第二阶段</div>
+      <div class="period">施工期 · 8个月</div>
+      <div class="tasks">水井钻探 · 管网铺设<br>储水设施 · 卫生模块<br><strong>多村落平行施工</strong></div>
+    </div>
+    <div class="flow-step" style="flex:3">
+      <div class="phase" style="color:#f39c12">第三阶段</div>
+      <div class="period">收尾 · 3个月</div>
+      <div class="tasks">系统调试 · 培训移交<br>竣工资料 · 缺陷修复</div>
+    </div>
+    <div class="flow-step" style="flex:1">
+      <div class="phase" style="color:#9b59b6">第四阶段</div>
+      <div class="period">质保期 · 12个月</div>
+      <div class="tasks">运行监测 · 整改<br>最终验收</div>
+    </div>
+  </div>
+</section>
+
+<!-- 项目优势 + 行动 -->
+<section>
+  <h2>🏆 项目优势</h2>
+  <div class="grid3">
+    <div class="badge-item"><div class="num" style="color:#2ecc71">✅</div><div class="lbl">世界银行出资，资金有保障</div></div>
+    <div class="badge-item"><div class="num" style="color:#2ecc71">✅</div><div class="lbl">项目已成熟，制度流程已跑通</div></div>
+    <div class="badge-item"><div class="num" style="color:#2ecc71">✅</div><div class="lbl">基础民生工程，政治风险低</div></div>
+    <div class="badge-item"><div class="num" style="color:#2ecc71">✅</div><div class="lbl">管理质量 Satisfactory</div></div>
+    <div class="badge-item"><div class="num" style="color:#2ecc71">✅</div><div class="lbl">总预算 US$1.5亿+</div></div>
+    <div class="badge-item"><div class="num" style="color:#2ecc71">✅</div><div class="lbl">后续有更多分包机会</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>📋 行动建议</h2>
+  <table class="action-table">
+    <tr><th style="width:60px">优先级</th><th style="width:80px">截止</th><th>事项</th></tr>
+    <tr><td><span class="tag tag-red">高</span></td><td>尽快</td><td>确认是否参与 → 获取完整招标文件并翻译</td></tr>
+    <tr><td><span class="tag tag-red">高</span></td><td>近期</td><td>寻找巴西本地建筑合作伙伴（联合体）</td></tr>
+    <tr><td><span class="tag tag-yellow">中</span></td><td>投标前</td><td>准备葡萄牙语资质文件</td></tr>
+    <tr><td><span class="tag tag-yellow">中</span></td><td>投标前</td><td>差旅塞阿拉州现场踏勘</td></tr>
+    <tr><td><span class="tag tag-green">低</span></td><td>长期</td><td>关注该项目的其他采购公告（光伏、培训等）</td></tr>
+  </table>
+</section>
+
+<!-- 流程图 -->
+<section>
+  <h2>🏗️ 投标决策流程图</h2>
+  <div class="chart-wrap">
+    <svg width="700" height="480" viewBox="0 0 700 480" style="max-width:100%">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#2980b9"/>
+        </marker>
+      </defs>
+      
+      <!-- 阶段1 -->
+      <rect x="220" y="10" width="260" height="50" rx="10" fill="#3498db"/>
+      <text x="350" y="42" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">① 获取招标文件</text>
+      <line x1="350" y1="60" x2="350" y2="85" stroke="#2980b9" stroke-width="2" marker-end="url(#arrow)"/>
+      
+      <!-- 分支 -->
+      <polygon points="350,90 420,120 350,150 280,120" fill="#e8f4fd" stroke="#3498db" stroke-width="2"/>
+      <text x="350" y="126" text-anchor="middle" fill="#2c3e50" font-size="12">是否参与</text>
+      
+      <!-- 否 -->
+      <line x1="280" y1="120" x2="100" y2="120" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+      <rect x="30" y="100" width="70" height="40" rx="20" fill="#fde8e8" stroke="#e74c3c" stroke-width="1.5"/>
+      <text x="65" y="125" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="600">否</text>
+      <rect x="30" y="150" width="100" height="36" rx="8" fill="#f0f0f0"/>
+      <text x="80" y="173" text-anchor="middle" fill="#888" font-size="11">放弃本次机会</text>
+      
+      <!-- 是 -->
+      <line x1="350" y1="150" x2="350" y2="180" stroke="#2980b9" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="370" y="168" fill="#27ae60" font-size="12" font-weight="600">是</text>
+      
+      <!-- 阶段2 -->
+      <rect x="180" y="185" width="340" height="44" rx="10" fill="#2ecc71"/>
+      <text x="350" y="213" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">② 寻找巴西本地合作伙伴（联合体）</text>
+      <line x1="350" y1="229" x2="350" y2="254" stroke="#2980b9" stroke-width="2" marker-end="url(#arrow)"/>
+      
+      <!-- 阶段3 -->
+      <rect x="180" y="260" width="340" height="44" rx="10" fill="#f39c12"/>
+      <text x="350" y="288" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">③ 准备葡萄牙语资质文件</text>
+      <line x1="350" y1="304" x2="350" y2="329" stroke="#2980b9" stroke-width="2" marker-end="url(#arrow)"/>
+      
+      <!-- 阶段4 -->
+      <rect x="155" y="335" width="390" height="44" rx="10" fill="#e67e22"/>
+      <text x="350" y="363" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">④ 现场踏勘 · 技术方案编制 · 报价</text>
+      <line x1="350" y1="379" x2="350" y2="404" stroke="#2980b9" stroke-width="2" marker-end="url(#arrow)"/>
+      
+      <!-- 最终 -->
+      <rect x="220" y="410" width="260" height="50" rx="25" fill="#1a5276"/>
+      <text x="350" y="440" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">📨 提交投标</text>
+    </svg>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  ⚠️ 分析基于公开世行项目信息（P167455），实际投标请以完整招标文件为准。<br>
+  建议在决策前获取全套招标文件并咨询巴西当地法律/税务顾问。
+</footer>
+
+</body>
+</html>
